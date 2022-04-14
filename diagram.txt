@@ -1,0 +1,3 @@
+Home page --> /melons ()
+
+/ homepage.html -(SHOP NOW) -> /melons all_melons.html (Details) -> /melonID melon_details.html 

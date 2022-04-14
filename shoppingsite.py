@@ -59,11 +59,38 @@ def show_melon(melon_id):
 @app.route("/cart")
 def show_shopping_cart():
     """Display content of shopping cart."""
+    
+    melon_shopping_cart = []
+    # melon_id, quantity, price, total price for *that melon*
+    total_cost = 0
+
+  
+
+    if 'cart' in session: 
+        for melon_id in session['cart']:
+            
+            melon_name = melons.melon_types[melon_id].common_name
+            quantity_in_cart = session['cart'][melon_id]
+            price_per_melon = melons.melon_types[melon_id].price
+            subtotal_per_melon = quantity_in_cart * price_per_melon
+
+            cart_dict = {"melon_name": melon_name, 
+            "quantity_in_cart": quantity_in_cart,
+            "price_per_melon" : price_per_melon, 
+            "subtotal_per_melon" : subtotal_per_melon
+            }
+
+            total_cost = total_cost + subtotal_per_melon
+            #add quantity and subtotal as attributes on melons.melon_types[melon_id]
+            melon_shopping_cart.append(cart_dict)
+            # print(f"{melon_id}, {quantity_in_cart}, hello {subtotal_per_melon}")
+        
+        print(melon_shopping_cart)
+        print(total_cost)
 
     # TODO: Display the contents of the shopping cart.
 
     # The logic here will be something like:
-    #
     # - get the cart dictionary from the session
     # - create a list to hold melon objects and a variable to hold the total
     #   cost of the order
